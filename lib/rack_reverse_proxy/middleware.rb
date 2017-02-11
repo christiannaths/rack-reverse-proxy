@@ -35,6 +35,7 @@ module RackReverseProxy
       if rule.is_a?(String) && url.is_a?(String) && URI(url).class == URI::Generic
         raise Errors::GenericURI.new, url
       end
+
       @rules << Rule.new(rule, url, opts)
     end
   end

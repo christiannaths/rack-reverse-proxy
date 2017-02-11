@@ -16,6 +16,7 @@ module RackReverseProxy
     end
 
     def call
+      return app.call(env) if @global_options[:if].respond_to?(:call) && !@global_options[:if].call(env)
       return app.call(env) if rule.nil?
       return proxy_with_newrelic if new_relic?
       proxy
